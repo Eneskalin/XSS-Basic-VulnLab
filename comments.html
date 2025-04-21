@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <title>Yorumlar</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>📖 Blog Yazısı</h2>
+    <div id="yorumlar"></div>
+
+    <textarea id="yorum" placeholder="Yorumunu yaz..."></textarea>
+    <button onclick="yorumEkle()">Yorum Ekle</button>
+    <button onclick="managerGit()">🔧 Admin Paneline Git</button>
+    <button onclick="logout()">🚪 Çıkış Yap</button>
+  </div>
+
+  <script>
+    async function yorumlariGetir() {
+      const res = await fetch("/comments/get");
+      const yorumlar = await res.json();
+      const yorumlarDiv = document.getElementById("yorumlar");
+      yorumlarDiv.innerHTML = "";
+
+      yorumlar.forEach(y => {
+        const yorumDiv = document.createElement("div");
+        yorumDiv.className = "yorum";
+        yorumDiv.innerHTML = `<strong>${y.username}:</strong> ${y.text}`;
+        
+        // Yorum içinde script varsa çalıştırılır
+        yorumDiv.querySelectorAll('script').forEach(oldScript => {
+          const newScript = document.createElement('script');
+          newScript.text = oldScript.innerText;
+          document.body.appendChild(newScript);
+        });
+
+        yorumlarDiv.appendChild(yorumDiv);
+      });
+    }
+
+    async function yorumEkle() {
+      const yorum = document.getElementById("yorum").value;
+      const token = localStorage.getItem("token");
+
+      const res = await fetch("/comments/add", {
+        method: "POST",
+        headers: {
+          "Content-Type":"application/json",
+          "Authorization": token
+        },
+        body: JSON.stringify({text: yorum})
+      });
+
+      if(res.ok){
+        yorumlariGetir();
+        document.getElementById("yorum").value = "";
+      } else {
+        alert("Yorum eklenemedi!");
+      }
+    }
+
+    function logout(){
+      localStorage.removeItem("token");
+      window.location.href = "/index.html";
+    }
+
+    async function managerGit(){
+      const token = localStorage.getItem("token");
+      const res = await fetch("/manager", {
+        headers: { "Authorization": token }
+      });
+      if(res.ok){
+        alert(await res.text());
+      } else {
+        alert("Yetkin yok");
+      }
+    }
+
+    yorumlariGetir();
+  </script>
+</body>
+</html>

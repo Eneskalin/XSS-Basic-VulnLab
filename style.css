@@ -1,0 +1,55 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fa;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+input[type="text"], input[type="password"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    background-color: #5a9bf6;
+    color: white;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #3e80e5;
+}
+
+h2, h3 {
+    text-align: center;
+    color: #333;
+}
+
+#yorumlar {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #eef2f7;
+    min-height: 100px;
+}
+
+.yorum {
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 5px;
+}
