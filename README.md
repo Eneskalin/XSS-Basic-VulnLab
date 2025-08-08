@@ -5,14 +5,6 @@
 ## Yükleme 
 
 
-
-```bash 
-  git clone https://github.com/Eneskalin/XSS-Basic-VulnLab.git
-  cd XSS-Basic-VulnLab
-```
-    
-## Bilgisayarınızda Çalıştırın
-
 Projeyi klonlayın
 
 ```bash
